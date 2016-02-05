@@ -1,7 +1,6 @@
 # torcontrol
 Extension of Node.js torcontrol library
 
-# node-tor-control
 A node library to communicate with tor-control
 
 *For basic information about tor-control please read the
@@ -9,12 +8,8 @@ A node library to communicate with tor-control
 
 ## How to use
 
-```bash
-npm install tor-control --save
-```
-
 ```js
-var TorControl = require('tor-control');
+var TorControl = require('torcontrol.js');
 
 var control = new TorControl({
     // password: 'password',                     // Your password for tor-control
@@ -48,7 +43,7 @@ control.onTor('HS_DESC_CONTENT', function(data) { // Listen to tor events
 
 control.hsfetch('facebookcorewwwi', null, function(err, status) { // Use HSFETCH to get HS descriptors
  if (err) {
- return console.error(err);
+    return console.error(err);
  }
  console.log(status.messages.join(' - '));
  });
