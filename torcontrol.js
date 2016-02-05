@@ -100,7 +100,7 @@ var TorControl = function TorControl(opts) {
                     }
                     break;
                 case '+':           // '+' MultiLine message, terminated by "650 OK\r\n" 
-                    var end = content.search(/650 OK\r?\n/);
+                    var end = content.search(/[0-9]{3} [A-Z].\r?\n/);
 
                     if(end === -1) {
                         return null;
