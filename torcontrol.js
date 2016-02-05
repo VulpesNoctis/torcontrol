@@ -99,8 +99,8 @@ var TorControl = function TorControl(opts) {
                         }
                     }
                     break;
-                case '+':           // '+' MultiLine message, terminated by './\r?\n/' seems to be followed by "650 OK"
-                    var end = content.search(/\.\r?\n/);
+                case '+':           // '+' MultiLine message, terminated by "650 OK\r\n" 
+                    var end = content.search(/650 OK\r?\n/);
 
                     if(end === -1) {
                         return null;
