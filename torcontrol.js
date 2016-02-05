@@ -519,7 +519,9 @@ TorControl.prototype = {
         'TRANSPORT_LAUNCHED',
         'HS_DESC',
         'HS_DESC_CONTENT',
-        'NETWORK_LIVENESS'
+        'NETWORK_LIVENESS',
+        'HSDIR_DESC_CONTENT',
+        'HSDIR_DESC_REQUEST'
     ]
 };
 
