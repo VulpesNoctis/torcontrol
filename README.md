@@ -55,4 +55,4 @@ control.hsfetch('facebookcorewwwi', null, function(err, status) { // Use HSFETCH
 
 ```
 
-All commands from spec are supported. For further information take a look at the source-code and the specs.
+NOT all commands from spec are supported. For further information take a look at the source-code and the specs.
