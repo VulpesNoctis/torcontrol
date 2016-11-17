@@ -331,7 +331,58 @@ TorControl.prototype = {
     signalCleardnscache: function sendSignalClearDnsCache(cb) {
         return this.signal('CLEARDNSCACHE', cb);
     },
+    
+    // AddHiddenService
+    // No Auth for now
+    addOnion: function (privateKey, flags, port, cb) {
+        var checkFlag = function(flag) {
+            return ['DiscardPK', 
+                    'Detach', 
+                    'BasicAuth', 
+                    'NonAnonymous'].indexOf(flag) != -1; //TODO: Error if this is false
+        }
+        
+        var flagstr = '';
+        var portstr = ' Port=';
+        
+        if (! port ) {
+            return 0; //TODO: Error
+        }
+        else if ( Number.isInteger(port) ) {
+            portstr += port;
+        }
+        else if ( (typeof port === 'object') && port.virtport && port.target) {
+            if (! Number.isInteger(port.virtport) ) {
+                return 0; //TODO: Error        
+            }
+            portstr += port.virtport + ',' + port.target;
+        }
+        else {
+            return 0; //TODO: Error
+        }
+        
+        if (! privateKey) {
+            privateKey = 'NEW:BEST';
+        }
+        else {
+            privateKey = 'RSA1024:' + privateKey;   
+        }
+        
+        if (flags) {
+            flagstr = ' Flag=';
+            if(Array.isArray(flags)) {
+                for(var i = 0; i < flags.length; i++) {
+                    flagstr += checkFlag(flags[i]) ? flags[i] : '';
+                }
+            }
+            else {
+                flagstr += checkFlag(flags) ? flags : '';
+            }
+        }
 
+        return this.sendCommand('ADD_ONION ' + privateKey + flagstr + portstr, cb):
+    },
+    
     // MapAddress
     mapAddress: function mapAddress(address, cb) { // Chapter 3.8
         return this.sendCommand('MAPADDRESS ' + address, cb);
